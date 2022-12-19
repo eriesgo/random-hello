@@ -1,0 +1,44 @@
+{
+  "name": "@feelpop/random-hello",
+  "version": "2.0.0",
+  "description": "Sample library to learn how to create npm modules",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "mypublish": "npm publish --access public",
+    "clean": "rm -rf ./lib",
+    "build": "npm run clean && npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc -p ./configs/tsconfig.esm.json && mv lib/esm/index.js lib/esm/index.mjs",
+    "build:cjs": "tsc -p ./configs/tsconfig.cjs.json",
+    "prepack": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eriesgo/random-hello.git"
+  },
+  "author": "Enrique Riesgo-Canal",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/eriesgo/random-hello/issues"
+  },
+  "homepage": "https://github.com/eriesgo/random-hello#readme",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/esm/types/index.d.ts",
+        "default": "./lib/esm/index.mjs"
+      },
+      "require": {
+        "types": "./lib/cjs/types/index.d.ts",
+        "default": "./lib/cjs/index.js"
+      }
+    }
+  },
+  "types": "./lib/cjs/types/index.d.ts",
+  "main": "./lib/cjs/index.js",
+  "files": [
+    "lib/**/*"
+  ],
+  "dependencies": {
+    "typescript": "^4.9.4"
+  }
+}
